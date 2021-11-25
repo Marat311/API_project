@@ -11,12 +11,15 @@ import java.util.List;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 
+
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class SpartanPostPutPatchRequest extends SpartanTestBase {
 
        List<String>size;
     Object id;
 
     @Test
+    @Order(1)
     public void testAddDataStringBody(){
         /**
          POST /spartans
@@ -71,6 +74,7 @@ public class SpartanPostPutPatchRequest extends SpartanTestBase {
     }
 
     @Test
+    @Order(2)
     public void testUpdateSpartan(){
 
         String newBody = "{\n" +
@@ -113,6 +117,7 @@ public class SpartanPostPutPatchRequest extends SpartanTestBase {
     }
 
     @Test
+    @Order(3)
     public void testPartiallyUpdateSpartan(){
         Response response = given().log().all().when().get("/spartans");
         size = response.path("id");
@@ -144,6 +149,7 @@ public class SpartanPostPutPatchRequest extends SpartanTestBase {
 
 
     @Test
+    @Order(4)
     public void testDeleteSpartan(){
         Response response = given().log().all().when().get("/spartans");
         size = response.path("id");
